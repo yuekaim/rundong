@@ -6,5 +6,5 @@ module.exports = {
     title: `rundong`,
     siteUrl: `https://www.yourdomain.tld`
   },
-  plugins: ["gatsby-plugin-netlify-cms"]
+  plugins: ["gatsby-plugin-netlify-cms"],
 };
