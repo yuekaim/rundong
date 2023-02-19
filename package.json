@@ -18,8 +18,9 @@
     "gatsby": "^5.6.1",
     "gatsby-cli": "^5.6.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "NODE_VERSION": "18.14.1",
-    "NPM_VERSION": "9.3.1"
+    "react-dom": "^18.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
