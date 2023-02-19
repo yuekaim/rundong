@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: main # Change to your production branch
+  branch: master # Change to your production branch
 
 local_backend: true # Enables Netlify CMS locally
 
@@ -10,18 +10,137 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - name: 'projects'
-    label: 'Projects'
-    folder: 'content/projects'
+  - name: config
+    label: Site Configuration
+    files:
+      - name: config
+        label: Site Configuration
+        file: site-metadata.json
+        fields:
+          - widget: string
+            name: title
+            label: Title
+            required: true
+          - widget: string
+            name: description
+            label: Description
+            required: true
+          - widget: select
+            name: palette
+            label: Color Palette
+            required: true
+            hint: The color palette used for the website.
+            options:
+              - Blue
+              - Green
+              - Black & White
+  - name: people
+    label: Our Team
+    folder: /src/team/
     create: true
-    slug: 'index'
-    media_folder: ''
-    public_folder: ''
-    path: '{{title}}/index'
-    editor:
-      preview: true # Displays a preview of your post while editing it
-      fields: # Fields get placed in resulting Markdown file
-        - { label: 'Title', name: 'title', widget: 'string' }
-        - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-        - { label: 'Description', name: 'description', widget: 'string' }
-        - { label: 'Body', name: 'body', widget: 'markdown' }
+    extension: md
+    slug: '{{slug}}'
+    identifier_field: personname
+    fields:
+      - widget: string
+        name: personname
+        label: Name
+        required: true
+      - widget: string
+        name: email
+        label: Email Address 
+        required: false
+      - widget: string
+        name: phone
+        label: Phone Number of the person
+        required: false
+        hint: "E.g.: 999.555.9999"
+      - widget: image
+        name: personimage
+        label: Image
+        required: false
+      - widget: markdown
+        name: personprofile
+        label: Person Profile
+        required: false
+      - widget: hidden
+        name: template
+        label: Template
+        required: true
+        default: page
+    filter:
+      field: template
+      value: page
+
+  - name: pages
+    label: Pages
+    files:
+      - name: about
+        label: About
+        file: /src/about/index.md
+        fields:
+          - widget: string
+            name: title
+            label: Title
+            required: true
+          - widget: string
+            name: subtitle
+            label: Subtitle
+            required: false
+            hint: The text shown below the page title
+          - widget: image
+            name: image
+            label: Image
+            required: false
+            hint: The image shown below the page title
+          - widget: hidden
+            name: template
+            label: Template
+            required: true
+            default: page
+          - widget: markdown
+            name: body
+            label: Content
+            required: false
+            hint: Page content
+
+      - name: testimonials
+        label: Testimonials
+        file: /src/testimonials/index.md
+        widget: list
+        fields:
+          - widget: string
+            name: quote
+            label: Quote
+            required: true
+            hint: Client's testimonial
+          - widget: string
+            name: author
+            label: Author
+            required: false
+            hint: Client's name
+      - name: contact
+        label: Contact Information
+        file: /src/contact/index.md
+        widget: object
+        fields:
+          - widget: string
+            name: location
+            label: Location name
+            required: false
+          - widget: string
+            name: address
+            label: Address
+            required: true
+          - widget: string
+            name: email
+            label: Email Address
+            required: false
+          - widget: string
+            name: phone
+            label: Phone
+            required: false
+          - widget: string
+            name: fax
+            label: Fax Number
+            required: false
